@@ -9,7 +9,7 @@ struct AnimData
     float runningTime;
 };
 
-// check if rectangle is on ground
+// check if the rectangle is on ground
 bool isOnGround(AnimData data, int windowHeight)
 {
     return data.pos.y >= windowHeight - data.rec.height;
@@ -57,7 +57,7 @@ void drawRepeatedTextures(float layerX, Texture2D layer)
 
 int main() 
 {
-    // initilize the window
+    // initialize the window
     int windowDimentions[2];
     windowDimentions[0] = 512; // width
     windowDimentions[1] = 375; // height
@@ -98,17 +98,16 @@ int main()
 
     for (int i = 0; i<sizeOfNebulae; i++)
     {
-    nebulae[i].rec.x = 0.0;
-    nebulae[i].rec.y = 0.0;
-    nebulae[i].rec.width = nebula.width/8;
-    nebulae[i].rec.height = nebula.height/8;
-    nebulae[i].pos.y = windowDimentions[1] - nebula.height/8;
-    nebulae[i].frame = 0;
-    nebulae[i].runningTime = 0.0;
-    nebulae[i].runningTime = 1.0/16.0;
-    nebulae[i].pos.x = windowDimentions[0] + i*nebDistan;
+        nebulae[i].rec.x = 0.0;
+        nebulae[i].rec.y = 0.0;
+        nebulae[i].rec.width = nebula.width/8;
+        nebulae[i].rec.height = nebula.height/8;
+        nebulae[i].pos.y = windowDimentions[1] - nebula.height/8;
+        nebulae[i].frame = 0;
+        nebulae[i].runningTime = 0.0;
+        nebulae[i].runningTime = 1.0/16.0;
+        nebulae[i].pos.x = windowDimentions[0] + i*nebDistan;
     }
-
 
     // nebula X velocity (pixels/sec)
     int velocity = 0;
@@ -189,27 +188,31 @@ int main()
          * ANIMATION
         */
         // update each nebula animation frame
-       for (int i=0; i<sizeOfNebulae; i++)
-       {
-        nebulae[i] = updateAnimDate(nebulae[i], dT, 7);
-       }
+        for (int i=0; i<sizeOfNebulae; i++)
+        {
+            nebulae[i] = updateAnimDate(nebulae[i], dT, 7);
+        }
         // update scarfy animation frame
         if (!isInAir) 
         {
             scarfyData = updateAnimDate(scarfyData, dT, 5);
         }
 
-        // Game results
-        for (AnimData nebula: nebulae) // range based forloop 
+        /*
+        * Game results
+        */ 
+        for (AnimData nebula: nebulae) // range based for loop 
         {
             float pad{50};
-            Rectangle nebRec{
+            Rectangle nebRec
+            {
                 nebula.pos.x + pad,
                 nebula.pos.y + pad,
                 nebula.rec.width - 2*pad,
                 nebula.rec.height - 2*pad
             };
-            Rectangle scarfyRec{
+            Rectangle scarfyRec
+            {
                 scarfyData.pos.x,
                 scarfyData.pos.y,
                 scarfyData.rec.width,
